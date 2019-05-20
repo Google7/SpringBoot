@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.demo.restful.mapper.UserMapper">
+
+    <!--id对应接口中的方法，名字要一样，parameterType是方法的参数类型，
+    resultType是查询返回的类型，需要注意的是，这里的SQL语句后面不能加分号，变量不能加引号-->
+
+    <select id="selectAll" resultType="user">
+        select * from userinfo
+    </select>
+
+    <select id="selectByUserId" parameterType="int" resultType="user">
+        select * from userinfo t where t.userid = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="String">
+        insert into userinfo(username, userpwd, usersex, userage, usercity) values(#{userName},#{userPwd},0,0,null)
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update userinfo t set t.username = #{userName} where t.userid = #{userId}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from userinfo where userid = #{userId}
+    </delete>
+
+    <update id="demo" parameterType="user">
+        update userinfo t set t.username = #{userName} where t.userid = #{userId}
+    </update>
+</mapper>
+
